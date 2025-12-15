@@ -23,7 +23,7 @@ import { uploadToCloudinary } from "../middlewares/uploadImage.js";
 import { isAdmin } from "../middlewares/isAdmin.js";
 
 //Importamos el middleware para validarId
-import { validateId } from "../middlewares/ValidateId.js";
+import { validateId } from "../middlewares/validateId.js";
 
 const router = Router();
 
@@ -48,7 +48,7 @@ router.put('/products/:id', validateId, authRequired, isAdmin, validateSchema(pr
 
 //Ruta para actualizar un producto y CAMBIAR la imagen
 router.put('/products/updatewithimage/:id', validateId, authRequired, isAdmin, uploadToCloudinary,
-                                            validateSchema(productSchema), updateProductWithImage);
+    validateSchema(productSchema), updateProductWithImage);
 
 //Ruta para obtener todos los productos para la compra
 router.get('/getallproducts', authRequired, getAllProducts)

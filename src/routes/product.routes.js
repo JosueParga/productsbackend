@@ -23,7 +23,7 @@ import { uploadToCloudinary } from "../middlewares/uploadImage.js";
 import { isAdmin } from "../middlewares/isAdmin.js";
 
 //Importamos el middleware para validarId
-import { ValidateId } from "../middlewares/ValidateId.js";
+import { validateId } from "../middlewares/ValidateId.js";
 
 const router = Router();
 
@@ -38,16 +38,16 @@ router.post('/products', authRequired, isAdmin, uploadToCloudinary,
     validateSchema(productSchema), createProduct);
 
 //Ruta para obtener un producto por ID
-router.get('/products/:id', ValidateId, authRequired, isAdmin, getProduct);
+router.get('/products/:id', validateId, authRequired, isAdmin, getProduct);
 
 //Ruta para eliminar un producto 
-router.delete('/products/:id', ValidateId, authRequired, isAdmin, deleteProduct);
+router.delete('/products/:id', validateId, authRequired, isAdmin, deleteProduct);
 
 //Ruta para actualizar un producto sin actualizar imagen
-router.put('/products/:id', ValidateId, authRequired, isAdmin, validateSchema(productUpdateSchema), updateProductWithoutImage);
+router.put('/products/:id', validateId, authRequired, isAdmin, validateSchema(productUpdateSchema), updateProductWithoutImage);
 
 //Ruta para actualizar un producto y CAMBIAR la imagen
-router.put('/products/updatewithimage/:id', ValidateId, authRequired, isAdmin, uploadToCloudinary,
+router.put('/products/updatewithimage/:id', validateId, authRequired, isAdmin, uploadToCloudinary,
     validateSchema(productSchema), updateProductWithImage);
 
 //Ruta para obtener todos los productos para la compra
